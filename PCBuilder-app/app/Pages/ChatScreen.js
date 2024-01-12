@@ -3,55 +3,28 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Bubble, GiftedChat, InputToolbar, Send } from 'react-native-gifted-chat'
 import { FontAwesome } from '@expo/vector-icons';
 import GlobalApi from '../Services/GlobalApi';
+import { useRoute } from "@react-navigation/native"
+
+
 export default function ChatScreen() {
-//     const [messages, setMessages] = useState([])
+    const route=useRoute() 
+    const userValue=route.params?.userValue
 
-//   useEffect(() => {
-//     setMessages([
-//       {
-//         _id: 1,
-//         text: 'Hello developer',
-//         createdAt: new Date(),
-//         user: {
-//           _id: 2,
-//           name: 'React Native',
-//           avatar: 'https://placeimg.com/140/140/any',
-//         },
-//       },
-//     ])
-//   }, [])
-
+    var message1="As of today, build me a pc "+userValue
+    
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
-    
 
-  
-
-//   const onSend = useCallback((messages = []) => {
-//     setMessages(previousMessages =>
-//       GiftedChat.append(previousMessages, messages),
-//     )
-//   }, [])
-//   return (
-
-//     <View style={{flex:1,backgroundColor:'black'}}>
-//       <GiftedChat
-//       messages={messages}
-//       onSend={messages => onSend(messages)}
-//       user={{
-//         _id: 1,
-//       }}
-//     />
 const onSend = useCallback((messages = []) => {
        
     setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
     if(messages[0].text)
     {
-      getBardResp(messages[0].text);
+      getGemeniresp(messages[0].text);
     }
   }, [])
 
-  const getBardResp=(msg)=>{
+  const getGemeniresp=(msg)=>{
       setLoading(true)
       GlobalApi.getGemeni(msg).then(resp=>{
          
@@ -80,7 +53,7 @@ const onSend = useCallback((messages = []) => {
                   createdAt: new Date(),
                   user: {
                     _id: 2,
-                    name: 'React Native',
+                    name: 'P C',
                     
                 
                 }
