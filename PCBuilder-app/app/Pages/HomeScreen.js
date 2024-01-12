@@ -57,7 +57,7 @@ const HomeScreen = () => {
   
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCase, setSelectedCase] = useState([]);
-  const [selectedBudget, setSelectedBudget] = useState(); 
+  const [selectedBudget, setSelectedBudget] = useState(2000); 
   const navigation=useNavigation();
   const [formattedValues, setFormattedValues] = useState("");
 
@@ -83,11 +83,14 @@ const HomeScreen = () => {
   //   console.log(userValue);
   //   return userValue;
   // };
+  
   const combined =()=>{
     const selectedCasesString = selectedCase.toString();
-    userValue = `Country: ${selectedCountry}, Use Cases: ${selectedCasesString}, Budget: ${selectedBudget} SAR`;
-    navigation.navigate('chat',{userValue});
+    userValue = `\nCountry: ${selectedCountry},\n Use Cases: ${selectedCasesString},\n Budget: ${selectedBudget} SAR`;
     
+    if(selectedCountry!="" && selectedCasesString!=""){
+    navigation.navigate('chat',{userValue});
+    }
   }
   
   return (
@@ -154,6 +157,7 @@ const HomeScreen = () => {
         <Text style={{color:'white',textAlign:'center',paddingBottom:50,fontSize:20,fontWeight:'bold'}}> {selectedBudget} SAR</Text>
         <View style={{alignItems:'center'}}>
         <TouchableOpacity
+        
       onPress={combined}
       style={{backgroundColor: 'purple',
       borderRadius: 10, // Adjust the borderRadius as needed
@@ -161,7 +165,7 @@ const HomeScreen = () => {
       width: 100, // Adjust the width as needed
       alignItems: 'center',justifyContent:'center'}}>
       <Text style={{color: 'white',
-    fontWeight: 'bold'}}>Learn More</Text>
+    fontWeight: 'bold'}}>Build</Text>
     </TouchableOpacity>
     
     </View>
